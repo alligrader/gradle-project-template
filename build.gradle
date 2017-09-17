@@ -4,8 +4,10 @@ buildscript {
     }
     dependencies {
         classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-RC3'
+        classpath group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7.1'
     }
 }
+import groovyx.net.http.HTTPBuilder
 
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
@@ -29,3 +31,25 @@ sourceSets {
         java.srcDirs = ['test']
     }
 }
+
+/*
+task 'health-check' {
+
+    // Run the HTTPBuilder to see if the postback service is healthy
+    def http = new HTTPBuilder()
+    http.request('http://localhost:3456', GET, TEXT) { req ->
+        uri.path = '/healthz'
+        
+        response.success = { resp, reader ->
+            assert resp.statusLine.statusCode == 200
+            println "Got response: ${resp.statusLine}"
+            println "Content-Type: ${resp.headers.'Content-Type'}"
+            println reader.text
+        }
+ 
+        response.'404' = {
+            println 'Not found'
+        }       
+    }
+}
+*/
