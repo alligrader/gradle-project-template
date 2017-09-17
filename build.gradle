@@ -10,6 +10,9 @@ buildscript {
 import groovyx.net.http.HTTPBuilder
 
 // Apply the java plugin to add support for Java
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
 apply plugin: 'java'
 apply plugin: 'org.junit.platform.gradle.plugin'
 
